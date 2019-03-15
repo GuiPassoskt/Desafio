@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-md-6 col-sm-12 left">
+        <i id="icon" class="fa fa-search"></i>
+        <input type="text"  class="search" placeholder="Digite a palavra-chave e tecle enter para pesquisa-la">
+        </div>
+        <div class="col-md-6 col-sm-12 right">
+        Visualizar:
+        <button type="button" class="btn freela">Freelas</button>
+        <button type="button" class="btn users">Usuários</button>
+        <button type="button" class="btn new" (click)="open(content)">Novo Membro</button>
+    </div> 
+</div>
+<div class="row">
+    <div class="col-md-3 col-sm-12" *ngFor="let person of persons">
+        <div class="card-box" (click)="onEdit(person)">
+            <img src="../../assets/img/user.png" alt="">
+            <div class="name">
+                <h4>{{person.name}}</h4>
+                <p>{{person.email}}</p>
+            </div>
+          </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Novo Usuário</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form id="forms">
+        <div class="form-group">
+            <label for="name">Nome</label>
+            <input type="text" class="form-control" name="name" [(ngModel)]="persons.name">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" name="email" [(ngModel)]="persons.email">
+        </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-block btn-outline-dark"  (click)="onSubmit(persons)">Salvar</button>
+    </div>
+</ng-template>
